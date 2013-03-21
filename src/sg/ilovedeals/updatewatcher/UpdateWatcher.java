@@ -17,6 +17,7 @@ import java.util.concurrent.Executors;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 
 /**
  * 服务更新监视，一旦服务端返回更新数据，发送广播提示应用
@@ -31,10 +32,13 @@ public class UpdateWatcher {
 	static final String UPDATE_WATCHER_ACTION = "sg.ilovedeals.updatewatcher.watching-";
 	
 	static final int fixedThreadPoolSize = 3;
+	
+	public static boolean DEBUG = true;
+	
 	private Context context;
 	private long period = 10*1000;
 	private ResponseParser parser;
-	private ConcurrentHashMap<String,String> targetUrls = new ConcurrentHashMap<String,String>(1);
+	private ConcurrentHashMap<String,String> targetUrls = new ConcurrentHashMap<String,String>();
 	private ExecutorService executor = Executors.newFixedThreadPool(fixedThreadPoolSize);
 	private Timer timer;
 	
@@ -64,6 +68,9 @@ public class UpdateWatcher {
 		}
 		@Override
 		public void run() {
+			if(DEBUG){
+				Log.d("UpdateWatcher", "Update-watching --> "+taskUrl);
+			}
 			try {
 				URL targetUrl = new URL(taskUrl);
 				HttpURLConnection connection = (HttpURLConnection) targetUrl.openConnection();
@@ -149,7 +156,9 @@ public class UpdateWatcher {
 	 * 取消全部监听。
 	 */
 	public void cancel(){
-		timer.cancel();
+		if(timer != null){
+			timer.cancel();
+		}
 		timer = null;
 	}
 	
