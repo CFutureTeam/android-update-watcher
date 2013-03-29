@@ -1,4 +1,4 @@
-package sg.ilovedeals.updatewatcher;
+package net.yoojia.updatewatcher;
 
 import java.io.BufferedReader;
 import java.io.IOException;

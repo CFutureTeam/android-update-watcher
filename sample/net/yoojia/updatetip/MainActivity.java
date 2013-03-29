@@ -1,6 +1,6 @@
-package sg.ilovedeals.updatetip;
+package net.yoojia.updatetip;
 
-import sg.ilovedeals.updatewatcher.UpdateWatcher;
+import net.yoojia.updatewatcher.UpdateWatcher;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;

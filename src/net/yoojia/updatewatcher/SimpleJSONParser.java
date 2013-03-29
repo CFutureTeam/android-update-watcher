@@ -1,4 +1,4 @@
-package sg.ilovedeals.updatewatcher;
+package net.yoojia.updatewatcher;
 
 import org.json.JSONException;
 import org.json.JSONObject;
